@@ -16,8 +16,8 @@ get_script_dir <- function() {
 SCRIPT_DIR <- get_script_dir()
 ROOT <- normalizePath(file.path(SCRIPT_DIR, "..", ".."))
 
-DIST_DIR        <- file.path(ROOT, "output", "distance_matrix_all_phylogroups")
-PREPARATION_DIR <- file.path(ROOT, "output", "preparation")
+DIST_DIR        <- file.path(ROOT, "output", "03_distance" / "genotype_distance" / "genotypic_distance_matrix_all_phylogroups")
+PREPARATION_DIR <- file.path(ROOT, "output", "01_preparation")
 PHYLOGROUP_CSV  <- file.path(PREPARATION_DIR, "ecoli_genomes_filtered_25080_phylogroup.csv")
 
 
