@@ -10,11 +10,11 @@ from docplex.mp.model import Model
 # ----------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR_1 = ROOT / "output"/ "preparation"
-INPUT_DIR_2 = ROOT / "output"/ "amr_and_vf_genes"
-INPUT_DIR_3 = ROOT / "output"/ "gene_gene_distance"
+INPUT_DIR_1 = ROOT / "output"/ "01_preparation"
+INPUT_DIR_2 = ROOT / "output"/ "02_gene_screening" / "amr_and_vf_genes"
+INPUT_DIR_3 = ROOT / "output"/ "07_gene_gene_association" / "gene_gene_distance"
 
-OUTPUT_DIR = ROOT / "output" / "co_occurring_gene_clusters"
+OUTPUT_DIR = ROOT / "output" / "07_gene_gene_association" / "co_occurring_gene_clusters"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 PHYLOGROUP_CSV = INPUT_DIR_1 /"ecoli_genomes_filtered_25080_phylogroup.csv"
