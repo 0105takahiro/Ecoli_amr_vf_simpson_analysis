@@ -1,50 +1,33 @@
-# ----------------------------
+# ---------------------------
 # Dependencies
-# ----------------------------
+# ---------------------------
 suppressPackageStartupMessages({
   library(vegan)   # mantel
   library(dplyr)
   library(readr)
 })
 
-# ----------------------------
-# Project root resolution (folder name must be PROJECT_NAME)
-# ----------------------------
-PROJECT_NAME <- "E_coli_Jaccard_and_Simpson_Project"
-
-get_script_path <- function() {
-  # When executed via Rscript:
+get_script_dir <- function() {
   args <- commandArgs(trailingOnly = FALSE)
-  i <- grep("^--file=", args)
-  if (length(i) > 0) return(normalizePath(sub("^--file=", "", args[i])))
-  # When sourced interactively:
-  if (!is.null(sys.frames()[[1]]$ofile)) {
-    return(normalizePath(sys.frames()[[1]]$ofile))
-  }
-  stop("Unable to determine script path. Run via Rscript or source this file directly.")
+  file_arg <- "--file="
+  path <- sub(file_arg, "", args[grep(file_arg, args)])
+  if (length(path) == 1) return(dirname(normalizePath(path)))
 }
 
-resolve_project_root <- function(script_path) {
-  p <- dirname(script_path)
-  repeat {
-    if (basename(p) == PROJECT_NAME) return(p)
-    parent <- dirname(p)
-    if (parent == p) break
-    p <- parent
-  }
-  stop(sprintf("Project root '%s' not found above: %s", PROJECT_NAME, script_path))
-}
-
-SCRIPT_PATH <- get_script_path()
-ROOT <- resolve_project_root(SCRIPT_PATH)
-cat(sprintf("[INFO] PROJECT ROOT: %s\n", ROOT))
+SCRIPT_DIR <- get_script_dir()
+ROOT <- normalizePath(file.path(SCRIPT_DIR, "..", ".."))
 
 # ----------------------------
 # Directories (override by CLI args if needed)
 # ----------------------------
-GENOTYPE_MATRIX_DIR <- file.path(ROOT, "output", "genotypic_distance_matrix_each_phylogroup")
-SNP_MATRIX_DIR      <- file.path(ROOT, "output", "snp_dists_output")
-OUTPUT_DIR          <- file.path(ROOT, "output", "mantel_result")
+GENOTYPE_MATRIX_DIR <- file.path(ROOT, "output", "03_distance", "genotype_distance" , "genotypic_distance_matrix_each_phylogroup")
+SNP_MATRIX_DIR      <- file.path(ROOT, "output", "03_distance", "snp_distance", "snp_dists_output")
+
+OUTPUT_DIR_BASE     <- file.path(ROOT, "output", "06_intra_phylogroup_analysis")
+OUTPUT_DIR          <- file.path(OUTPUT_DIR_BASE, "mantel_result")
+dir.create(OUTPUT_DIR_BASE, recursive = TRUE, showWarnings = FALSE)
+dir.create(OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
+
 PERMUTATIONS        <- 1000L
 
 # CLI: Rscript mantel_vegan.R [GENOTYPE_DIR] [SNP_DIR] [OUTPUT_DIR] [PERM]
@@ -53,7 +36,6 @@ if (length(args) >= 1) GENOTYPE_MATRIX_DIR <- args[1]
 if (length(args) >= 2) SNP_MATRIX_DIR      <- args[2]
 if (length(args) >= 3) OUTPUT_DIR          <- args[3]
 if (length(args) >= 4) PERMUTATIONS        <- as.integer(args[4])
-dir.create(OUTPUT_DIR, recursive = TRUE, showWarnings = FALSE)
 
 cat("[INFO] GENOTYPE DIR: ", GENOTYPE_MATRIX_DIR, "\n", sep = "")
 cat("[INFO] SNP DIR     : ", SNP_MATRIX_DIR,      "\n", sep = "")
