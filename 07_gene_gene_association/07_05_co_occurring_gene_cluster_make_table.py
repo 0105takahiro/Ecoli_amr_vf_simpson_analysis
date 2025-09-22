@@ -15,7 +15,7 @@ plt.rcParams['font.family'] = 'Arial'
 # ============================
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR = ROOT / "output" / "co_occurring_gene_clusters"
+INPUT_DIR = ROOT / "output" /  "07_gene_gene_association" /"co_occurring_gene_clusters"
 OUTPUT_DIR  = ROOT / "figures"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
