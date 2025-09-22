@@ -14,12 +14,12 @@ from pathlib import Path
 # ---------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR = ROOT / "output" / "mantel_result"
+INPUT_DIR = ROOT / "output" / "06_intra_phylogroup_analysis" / "mantel_result"
 
 FIGURE_OUTPUT_DIR = ROOT / "figures"
 FIGURE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-OUT_FIGURE = FIGURE_OUTPUT_DIR / "mantel_result_heatmap_2.pdf"
-OUT_FIGURE_LEGEND = FIGURE_OUTPUT_DIR / "mantel_heatmap_legend_2.pdf"
+OUT_FIGURE = FIGURE_OUTPUT_DIR / "mantel_result_heatmap.pdf"
+OUT_FIGURE_LEGEND = FIGURE_OUTPUT_DIR / "mantel_heatmap_legend.pdf"
 
 AMR_JACCARD_MANTEL_CSV = INPUT_DIR / "mantel_result_amr_jaccard.csv"
 AMR_SIMPSON_MANTEL_CSV = INPUT_DIR / "mantel_result_amr_simpson.csv"
