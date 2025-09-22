@@ -13,13 +13,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 
 INPUT_DIR = ROOT / "output"
-OUTPUT_DIR = ROOT / "output" / "gene_gene_distance"
+OUTPUT_DIR = ROOT / "output" / "07_gene_gene_association" /"gene_gene_distance"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-PHYLOGROUP_CSV = INPUT_DIR / "preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
-ST_CSV = INPUT_DIR / "preparation" / "ecoli_genomes_filtered_25080_MLST.csv"
-AMR_CSV = INPUT_DIR / "amr_and_vf_genes_ok" / "amr_genes_presence_absence.csv"
-VF_CSV = INPUT_DIR / "amr_and_vf_genes_ok" / "vf_genes_presence_absence.csv"
+PHYLOGROUP_CSV = INPUT_DIR / "01_preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
+ST_CSV = INPUT_DIR / "01_preparation" / "ecoli_genomes_filtered_25080_MLST.csv"
+AMR_CSV = INPUT_DIR / "02_gene_screening" / "amr_and_vf_genes" / "amr_genes_presence_absence.csv"
+VF_CSV = INPUT_DIR / "02_gene_screening" / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
 
 phylogroup_df = pd.read_csv(PHYLOGROUP_CSV, index_col=0)
 st_df = pd.read_csv(ST_CSV, index_col=0)
