@@ -1,51 +1,27 @@
-# ----------------------------
+# ---------------------------
 # Dependencies
-# ----------------------------
+# ---------------------------
 suppressPackageStartupMessages({
-  library(clinfun)   # jonckheere.test
+  library(clinfun)
   library(dplyr)
   library(readr)
 })
 
-# ----------------------------
-# Project root resolution (folder name must be PROJECT_NAME)
-# ----------------------------
-PROJECT_NAME <- "E_coli_Jaccard_and_Simpson_Project"
-
-get_script_path <- function() {
-  # When executed via Rscript:
+get_script_dir <- function() {
   args <- commandArgs(trailingOnly = FALSE)
-  i <- grep("^--file=", args)
-  if (length(i) > 0) return(normalizePath(sub("^--file=", "", args[i])))
-
-  # When sourced interactively:
-  if (!is.null(sys.frames()[[1]]$ofile)) {
-    return(normalizePath(sys.frames()[[1]]$ofile))
-  }
-
-  stop("Unable to determine script path. Run via Rscript or source this file directly.")
+  file_arg <- "--file="
+  path <- sub(file_arg, "", args[grep(file_arg, args)])
+  if (length(path) == 1) return(dirname(normalizePath(path)))
 }
 
-resolve_project_root <- function(script_path) {
-  p <- dirname(script_path)
-  repeat {
-    if (basename(p) == PROJECT_NAME) return(p)
-    parent <- dirname(p)
-    if (parent == p) break
-    p <- parent
-  }
-  stop(sprintf("Project root '%s' not found above: %s", PROJECT_NAME, script_path))
-}
-
-SCRIPT_PATH <- get_script_path()
-ROOT <- resolve_project_root(SCRIPT_PATH)
-cat(sprintf("[INFO] PROJECT ROOT: %s\n", ROOT))
+SCRIPT_DIR <- get_script_dir()
+ROOT <- normalizePath(file.path(SCRIPT_DIR, "..", ".."))
 
 # ----------------------------
 # Fixed paths (no defaults/aliases)
 # ----------------------------
 GENOTYPIC_DISTANCE_DIR <- file.path(
-  ROOT, "output", "genotypic_distance_in_each_snp_range"
+  ROOT, "output", "06_intra_phylogroup_analysis" , "genotypic_distance_in_each_snp_range"
 )
 AMR_FILE <- file.path(
   GENOTYPIC_DISTANCE_DIR, "genotypic_distance_amr_in_each_cg_snp_distance.csv"
