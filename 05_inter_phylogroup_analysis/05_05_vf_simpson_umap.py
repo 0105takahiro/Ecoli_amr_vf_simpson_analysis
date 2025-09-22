@@ -16,9 +16,9 @@ ROOT = Path(__file__).resolve().parents[2]
 FIGURE_OUTPUT_DIR = ROOT/ "figures"/ "umap"
 FIGURE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-PHYLOGROUP_CSV = ROOT / "output" / "preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
-VF_CSV = ROOT / "output" / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
-VF_DISTANCE_MATRIX_CSV = ROOT / "output" / "distance_matrix_all_phylogroups" / "vf_simpson_distance_matrix_all_phylogroups.csv"
+PHYLOGROUP_CSV = ROOT / "output" / "01_preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
+VF_CSV = ROOT / "output" / "02_gene_screening" / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
+VF_DISTANCE_MATRIX_CSV = ROOT / "output" / "03_distance" / "genotype_distance" / "genotypic_distance_matrix_all_phylogroups" / "vf_simpson_distance_matrix_all_phylogroups.csv"
 
 # ============================================================
 # Load input data
