@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Reproducible directional gene pairs across phylogroups and major STs.
 
@@ -34,19 +33,16 @@ from statsmodels.stats.multitest import multipletests
 # ----------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR_1 = ROOT / "output" / "preparation"
-INPUT_DIR_2 = ROOT / "output" / "AMR_and_VF_genes_ok"
-INPUT_DIR_3 = ROOT / "output" / "gene_gene_distance"
+INPUT_DIR_1 = ROOT / "output" / "01_preparation"
+INPUT_DIR_2 = ROOT / "output" / "02_gene_screening" /"amr_and_vf_genes"
+INPUT_DIR_3 = ROOT / "output" / "07_gene_gene_association" / "gene_gene_distance"
 
-OUTPUT_DIR = ROOT / "Output" / "reproducible_directional_gene_pairs"
+OUTPUT_DIR = ROOT / "output" / "07_gene_gene_association"/ "reproducible_directional_gene_pairs"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-
-FIGURES_DIR = ROOT / "Figures"
-FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 PHYLOGROUP_CSV   = INPUT_DIR_1 / "ecoli_genomes_filtered_25080_phylogroup.csv"
 ST_CSV           = INPUT_DIR_1 / "ecoli_genomes_filtered_25080_mlst.csv"
-AMR_CSV          = INPUT_DIR_2 / "amr_genes-presence_absence.csv"
+AMR_CSV          = INPUT_DIR_2 / "amr_genes_presence_absence.csv"
 VF_CSV           = INPUT_DIR_2 / "vf_genes_presence_absence.csv"
 AMR_DISTANCE_CSV = INPUT_DIR_3 / "amr_gene_jaccard_and_simpson_distances.csv"
 VF_DISTANCE_CSV  = INPUT_DIR_3 / "vf_gene_jaccard_and_simpson_distances.csv"
@@ -66,7 +62,6 @@ vf_distance   = pd.read_csv(VF_DISTANCE_CSV,  index_col=0)
 
 # String matcher for Simpson similarity (Overlap Coefficient)
 oc = OverlapCoefficient()
-
 
 def _compute_pair_stats_in_top_sts(
     eligible_pairs: pd.DataFrame,
@@ -250,5 +245,5 @@ combined_repro_df = pd.concat([amr_repro_df, vf_repro_df], ignore_index=True)
 summary_by_pair = _summarize_pairs_by_phylogroup_st(combined_repro_df)
 
 # Save summary
-summary_by_pair.to_csv(OUTPUT_DIR/ "reproducible_gene_pairs.csv", index=False)
+summary_by_pair.to_csv(OUTPUT_DIR/ "reproducible_gene_pairs_2.csv", index=False)
 
