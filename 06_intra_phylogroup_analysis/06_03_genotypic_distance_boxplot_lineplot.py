@@ -8,20 +8,20 @@ from matplotlib.patches import Patch
 # Set consistent font for publication
 plt.rcParams['font.family'] = 'Arial'
 
-# ----------------------------
+# ---------------------------
 # Configuration 
-# ----------------------------
+# ---------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
 INPUT_DIR = ROOT / "output"
-GENOTYPIC_DISTANCE_DIR = INPUT_DIR / "genotypic_distance_matrix_each_phylogroup"
-SNP_DISTANCE_DIR = INPUT_DIR / "snp_dists_output"
+GENOTYPIC_DISTANCE_DIR = INPUT_DIR / "03_distance" / "genotype_distance" / "genotypic_distance_matrix_each_phylogroup"
+SNP_DISTANCE_DIR = INPUT_DIR / "03_distance" / "snp_distance" / "snp_dists_output"
 
-PHYLOGROUP_CSV = INPUT_DIR / "preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
-AMR_CSV = INPUT_DIR / "amr_and_vf_genes" / "amr_genes_presence_absence.csv"
-VF_CSV = INPUT_DIR / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
+PHYLOGROUP_CSV = INPUT_DIR / "01_preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
+AMR_CSV = INPUT_DIR / "02_gene_screening" / "amr_and_vf_genes" / "amr_genes_presence_absence.csv"
+VF_CSV = INPUT_DIR / "02_gene_screening" / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
 
-OUTPUT_DIR = INPUT_DIR / "genotypic_distance_in_each_snp_range"
+OUTPUT_DIR = INPUT_DIR / "06_intra_phylogroup_analysis" /"genotypic_distance_in_each_snp_range"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 FIGURE_OUTPUT_DIR = ROOT / "figures"
