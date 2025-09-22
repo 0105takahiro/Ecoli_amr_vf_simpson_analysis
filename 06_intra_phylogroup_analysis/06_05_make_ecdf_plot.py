@@ -18,12 +18,12 @@ plt.rcParams['font.family'] = 'Arial'
 ROOT = Path(__file__).resolve().parents[2]
 
 INPUT_DIR = ROOT / "output"
-GENOTYPIC_DISTANCE_DIR = INPUT_DIR / "genotypic_distance_matrix_each_phylogroup"
-SNP_DISTANCE_DIR = INPUT_DIR / "snp_dists_output"
+GENOTYPIC_DISTANCE_DIR = INPUT_DIR / "03_distance"/ "genotype_distance" /"genotypic_distance_matrix_each_phylogroup"
+SNP_DISTANCE_DIR = INPUT_DIR / "03_distance" / "snp_distance" / "snp_dists_output"
 
-PHYLOGROUP_CSV = INPUT_DIR / "preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
-AMR_CSV = INPUT_DIR / "amr_and_vf_genes" / "amr_genes_presence_absence.csv"
-VF_CSV = INPUT_DIR / "amr_and_vf_genes" / "vf_genes_presence_absence.csv"
+PHYLOGROUP_CSV = INPUT_DIR / "01_preparation" /"ecoli_genomes_filtered_25080_phylogroup.csv"
+AMR_CSV = INPUT_DIR / "02_gene_screening" / "amr_and_vf_genes" / "amr_genes_presence_absence.csv"
+VF_CSV = INPUT_DIR / "02_gene_screening" /"amr_and_vf_genes" / "vf_genes_presence_absence.csv"
 
 FIGURE_OUTPUT_DIR = ROOT / "figures" / "ecdf"
 FIGURE_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -205,7 +205,7 @@ for pg in phylogroups:
                    width=1,length=6)
 
     # Save figure
-    out_png = FIGURE_OUTPUT_DIR/ f"ecdf5_{pg_lower}.pdf"
+    out_png = FIGURE_OUTPUT_DIR/ f"ecdf_{pg_lower}.pdf"
     plt.savefig(out_png, dpi=600, bbox_inches='tight',pad_inches=0.03)
     plt.close()
 
@@ -244,7 +244,7 @@ legend_elements = [
 plt.figure(figsize=(6, 0.28))
 plt.axis("off")
 plt.legend(handles=legend_elements, loc="center", ncol=4, frameon=False)
-plt.savefig(FIGURE_OUTPUT_DIR / "ecdf_legend_5.pdf", dpi=600, bbox_inches="tight", pad_inches=0.01)
+plt.savefig(FIGURE_OUTPUT_DIR / "ecdf_legend.pdf", dpi=600, bbox_inches="tight", pad_inches=0.01)
 
 
 # ----------------------------
