@@ -17,13 +17,13 @@ plt.rcParams['font.family'] = 'Arial'
 # ----------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR_1 = ROOT / "output" / "preparation"
-INPUT_DIR_2 = ROOT / "output" / "amr_and_vf_genes"
-INPUT_DIR_3 = ROOT / "output" / "gene_gene_distance"
-INPUT_DIR_4 = ROOT / "output" / "co_occurring_gene_clusters" 
+INPUT_DIR_1 = ROOT / "output" / "01_preparation"
+INPUT_DIR_2 = ROOT / "output" / "02_gene_screening" / "amr_and_vf_genes"
+INPUT_DIR_3 = ROOT / "output" / "07_gene_gene_association" / "gene_gene_distance"
+INPUT_DIR_4 = ROOT / "output" / "07_gene_gene_association" / "co_occurring_gene_clusters" 
 
 
-OUTPUT_DIR_1 = ROOT / "output" / "gene_gene_distance"
+OUTPUT_DIR_1 = ROOT / "output" / "07_gene_gene_association" / "gene_gene_distance"
 OUTPUT_DIR_1.mkdir(parents=True, exist_ok=True)
 OUTPUT_DIR_2 = ROOT / "figures"
 OUTPUT_DIR_2.mkdir(parents=True, exist_ok=True)
@@ -185,8 +185,8 @@ categorized_vf=q_categorization(vf_fdr)
 amr_jaccard_and_simpson=pd.merge(categorized_amr,amr_jaccard_shrinked[['Gene 1','Gene 2','Phylogroup','Jaccard distance']],on=['Gene 1','Gene 2','Phylogroup'],how='left')
 vf_jaccard_and_simpson=pd.merge(categorized_vf,vf_jaccard_shrinked[['Gene 1','Gene 2','Phylogroup','Jaccard distance']],on=['Gene 1','Gene 2','Phylogroup'],how='left')
 
-amr_jaccard_and_simpson.to_csv(OUTPUT_DIR_1 / "amr_gene_jaccard_and_simpson_distances.csv")
-vf_jaccard_and_simpson.to_csv(OUTPUT_DIR_1 / "vf_gene_jaccard_and_simpson_distances.csv")
+amr_jaccard_and_simpson.to_csv(OUTPUT_DIR_1 / "amr_gene_jaccard_and_simpson_distances_2.csv")
+vf_jaccard_and_simpson.to_csv(OUTPUT_DIR_1 / "vf_gene_jaccard_and_simpson_distances_2.csv")
 
 # =============================================================================
 # Determine Gene Order for Plotting
