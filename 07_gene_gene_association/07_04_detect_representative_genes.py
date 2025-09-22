@@ -1,6 +1,5 @@
 from pathlib import Path
 import pickle
-
 import pandas as pd
 import numpy as np
 import networkx as nx
@@ -11,12 +10,12 @@ from itertools import combinations
 # ----------------------------
 ROOT = Path(__file__).resolve().parents[2]
 
-INPUT_DIR_1 = ROOT / "output" / "preparation"
-INPUT_DIR_2 = ROOT / "output" / "amr_and_vf_genes"
-INPUT_DIR_3 = ROOT / "output" / "gene_gene_distance"
-INPUT_DIR_4 = ROOT / "output" / "co_occurring_gene_clusters" 
+INPUT_DIR_1 = ROOT / "output" / "01_preparation"
+INPUT_DIR_2 = ROOT / "output" / "02_gene_screening" / "amr_and_vf_genes"
+INPUT_DIR_3 = ROOT / "output" / "07_gene_gene_association" / "gene_gene_distance"
+INPUT_DIR_4 = ROOT / "output" / "07_gene_gene_association" / "co_occurring_gene_clusters" 
 
-OUTPUT_DIR = ROOT / "output" / "co_occurring_gene_clusters" 
+OUTPUT_DIR = ROOT / "output" / "07_gene_gene_association" / "co_occurring_gene_clusters" 
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 PHYLOGROUP_CSV = INPUT_DIR_1 / "ecoli_genomes_filtered_25080_phylogroup.csv"
@@ -309,3 +308,4 @@ with open(OUTPUT_DIR / "represent_gene_amr.pkl", "wb") as f:
     pickle.dump(all_minimal_sets_amr, f)
 with open(OUTPUT_DIR / "represent_gene_vf.pkl", "wb") as f:
     pickle.dump(all_minimal_sets_vf, f)
+
